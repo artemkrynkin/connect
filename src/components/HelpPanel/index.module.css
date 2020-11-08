@@ -1,0 +1,40 @@
+.container {
+  background-color: var(--c-hex-slateGrey-4);
+  flex: 0 0 auto;
+  height: 100vh;
+  padding: 0 0 20px;
+  position: sticky;
+  top: 0;
+  width: 64px;
+  z-index: 1200;
+}
+
+.containerShadow {
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.2) 0px, rgba(0, 0, 0, 0.1) 1px, rgba(0, 0, 0, 0.1) 1px, rgba(0, 0, 0, 0) 100%);
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.logo {
+  align-items: center;
+  background: url('/img/logo_original.svg') no-repeat center center;
+  box-sizing: content-box;
+  color: var(--c-hex-slateGrey-2);
+  display: flex;
+  height: 34px;
+  margin: 8px 0 8px -6px;
+  transition: opacity 250ms ease-in-out;
+  width: 34px;
+}
+
+.userAvatar {
+  cursor: pointer;
+  margin-top: auto;
+}

@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+}
+
+.wrapOverflow {
+/*  overflow: hidden;*/
+}
+
+.wrapScroll {
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.wrapScroll {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none !important;
+}
+
+.wrapScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapContent {}

@@ -1,0 +1,114 @@
+.dropzonePhoto {
+  height: 200px;
+  margin: 0 auto;
+  position: relative;
+  width: 200px;
+}
+
+.dropzonePhoto:after {
+  border: 2px dashed var(--c-hex-brightness-5);
+  border-radius: 50%;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: border-color 250ms ease-out;
+  width: 100%;
+}
+
+.dropzonePhotoActive:after {
+  border-color: var(--c-hex-teal-300);
+  animation: dropzonePhotoActiveRunningBorder 8s linear 0s infinite normal none running;
+}
+
+.dropzonePhotoIcon {
+  color: rgba(var(--c-rgb-teal-A700), 0.8);
+  font-size: 80px;
+  margin-top: -10px;
+}
+
+.dropzonePhotoText {
+  color: var(--c-hex-blueGrey-300);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+@keyframes dropzonePhotoActiveRunningBorder {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dropzonePhotoUploadOr {
+  margin: 15px 0;
+}
+
+.dropzonePhotoError {
+  margin: 0 auto;
+  width: 340px;
+}
+
+.dropzoneErrorIcon {
+  color: var(--c-hex-red-400);
+  font-size: 60px;
+  margin-right: 20px;
+}
+
+.dropzonePhotoErrorContent {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.dropzonePhotoTryAgain {
+  margin-top: 10px;
+}
+
+.cropperContainer {
+  margin: 0 auto;
+  width: 280px;
+}
+
+.cropperMarkup {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAFo9M/3AAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAAXnVPIAAAAgUlEQVQ4EcWSSQ6AIAxFi/ECxoX3v50mDkdASvKIaWO6YEEX/PZ3BlIuclyPyH7equekh2ekSGULzijbuigvNUcVHJMaX3EpLqLVII1a2C4DB9h6QDAedlihf4awRRjQv0XYIgxw98ANgvZt4MGwA4F/OL6Aewc7qv1d1j9+he4JXoFBTf2gad2JAAAAAElFTkSuQmCC);
+  height: 280px;
+  position: relative;
+  width: 100%;
+}
+
+.cropperReset {
+  color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 1;
+}
+
+.cropperReset:hover {
+  color: white;
+}
+
+.cropperZoomSlider {
+  margin-top: 10px;
+}
+
+.cropperZoomSliderIconSmall {
+  color: var(--c-hex-blueGrey-400);
+  font-size: 12px;
+}
+
+.cropperZoomSliderIconLarge {
+  color: var(--c-hex-blueGrey-400);
+  font-size: 20px;
+}
+
+.avatarPreview {
+  margin-left: 16px;
+}
+
+.avatarPreview > div:not(:last-child) {
+  margin-bottom: 10px;
+}

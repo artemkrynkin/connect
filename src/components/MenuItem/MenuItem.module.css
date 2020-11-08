@@ -1,0 +1,53 @@
+.container.positive:hover {
+  background-color: var(--c-hex-teal-50);
+  color: var(--c-hex-teal-500);
+}
+
+.container.destructive:hover {
+  background-color: var(--c-hex-red-50);
+  color: var(--c-hex-red-500);
+}
+
+.content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.iconBefore,
+.iconAfter {
+  color: var(--c-hex-blueGrey-400);
+  font-size: 16px;
+  transition: background-color 50ms ease-out;
+}
+
+.container:hover .iconBefore,
+.container:hover .iconAfter {
+  color: var(--c-hex-blueGrey-700);
+}
+
+.container.positive:hover .iconBefore,
+.container.positive:hover .iconAfter {
+  color: var(--c-hex-teal-500);
+}
+
+.container.destructive:hover .iconBefore,
+.container.destructive:hover .iconAfter {
+  color: var(--c-hex-red-500);
+}
+
+.iconBefore {
+  margin-right: 12px;
+}
+
+.iconAfter {
+  margin-left: 12px;
+}
+
+.iconAfter svg[data-icon="check"] {
+  color: var(--c-hex-teal-300);
+  opacity: 0;
+}
+
+:global(.Mui-selected) .iconAfter svg[data-icon="check"] {
+  opacity: 1;
+}

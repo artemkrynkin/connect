@@ -1,0 +1,18 @@
+.loadingPage {
+  min-height: calc(100vh - 90px);
+}
+
+.empty {
+  min-height: calc(100vh - 175px);
+}
+
+.empty2 {
+  min-height: calc(100vh - 256px);
+}
+
+.title {
+  color: var(--c-hex-blueGrey-500);
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}

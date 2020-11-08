@@ -1,0 +1,19 @@
+.container {
+  margin: 0 auto;
+  max-width: 430px;
+}
+
+.card {
+  padding: 20px 40px;
+}
+
+.form {
+  margin-top: 15px;
+}
+
+.emailSentIcon {
+  color: rgba(var(--c-rgb-teal-A700), 0.8);
+  display: block;
+  font-size: 100px;
+  margin: 0 auto 20px;
+}

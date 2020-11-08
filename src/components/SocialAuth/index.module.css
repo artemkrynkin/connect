@@ -1,0 +1,32 @@
+.or {
+  margin: 20px 0;
+}
+
+.actionButtons > button:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.googleLogo,
+.yandexLogo,
+.facebookLogo,
+.vkLogo {
+  font-size: 20px !important;
+  height: 20px;
+  width: 20px;
+}
+
+.googleLogo {
+
+}
+
+.yandexLogo {
+  color: #ff0102;
+}
+
+.facebookLogo {
+  color: #1b77f2;
+}
+
+.vkLogo {
+
+}

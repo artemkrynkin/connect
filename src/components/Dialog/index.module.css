@@ -1,0 +1,14 @@
+:global(.sticky) {}
+
+:global(.stickyActions) :global(.MuiDialogActions-root) {
+  background-color: white;
+  border-top: 1px solid transparent;
+  border-radius: 0 0 8px 8px;
+  bottom: 0;
+  overflow: hidden;
+  position: sticky;
+}
+
+:global(.stickyActions) :global(.MuiDialogActions-root.stuck) {
+  border-top: 1px solid var(--c-hex-brightness-5);
+}

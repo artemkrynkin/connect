@@ -1,0 +1,40 @@
+import fs from 'fs';
+import i18n from 'i18n';
+import multer from 'multer';
+import logger from 'shared/logger';
+
+const debug = require('debug')('api:multerUpload');
+
+const rootFolder = process.env.NODE_ENV === 'production' ? 'build' : 'public';
+
+const uploadAvatarDS = multer.diskStorage({
+	destination: (req, file, cb) => {
+		const path = `${rootFolder}/uploads/${req.user.sub}`;
+
+		fs.mkdir(path, { recursive: true }, err => {
+			if (err) {
+				debug('upload error (uploadAvatar)');
+				logger.warn('upload error (uploadAvatar)');
+				throw err;
+			}
+
+			cb(null, path + '/');
+		});
+	},
+});
+export const uploadAvatar = multer({
+	storage: uploadAvatarDS,
+	limits: {
+		fileSize: 10 * 1024 * 1024, //10mb
+		files: 1,
+	},
+	fileFilter: (req, file, cb) => {
+		const typeArray = file.mimetype.split('/');
+
+		if (typeArray[0] === 'image' && (typeArray[1] === 'jpeg' || typeArray[1] === 'jpg' || typeArray[1] === 'png')) {
+			cb(null, true);
+		} else {
+			cb(null, false, new Error(i18n.__('Неподдерживаемый формат файла')));
+		}
+	},
+});

@@ -1,0 +1,106 @@
+.container {
+  margin: 0 auto;
+  max-width: 430px;
+}
+
+.card {
+  padding: 20px 40px;
+}
+
+.form {
+  margin-top: 15px;
+}
+
+.containerEula {
+  margin: 10px 0 -9px;
+}
+
+.eulaText {
+  font-size: 12px;
+}
+
+.toggleVisiblePassword {
+  margin-right: -8px;
+  padding: 10px 8px;
+}
+
+.passwordStrengthIndicator {
+  background-color: var(--c-hex-brightness-5);
+  height: 5px;
+  margin: 5px auto 0;
+  position: relative;
+  width: calc(100% - 8px);
+}
+
+.passwordStrengthIndicator:before {
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: background-color 200ms ease-out, width 200ms ease-out;
+  width: 0;
+}
+
+.passwordStrengthNone:before {
+  background-color: var(--c-hex-red-500);
+  width: 20%;
+}
+
+.passwordStrengthLow:before {
+  background-color: var(--c-hex-orange-600);
+  width: 40%;
+}
+
+.passwordStrengthFair:before {
+  background-color: var(--c-hex-orange-300);
+  width: 60%;
+}
+
+.passwordStrengthGood:before {
+  background-color: var(--c-hex-teal-200);
+  width: 80%;
+}
+
+.passwordStrengthExcellent:before {
+  background-color: var(--c-hex-teal-A700);
+  width: 100%;
+}
+
+.passwordStrengthIndicatorDivision1,
+.passwordStrengthIndicatorDivision2,
+.passwordStrengthIndicatorDivision3,
+.passwordStrengthIndicatorDivision4,
+.passwordStrengthIndicatorDivision5 {
+  box-shadow: 0 0 0 4px white;
+  border-radius: 5px;
+  height: 5px;
+  position: absolute;
+  top: 0;
+  width: calc(20% - 4px);
+}
+
+.passwordStrengthIndicatorDivision1 {
+  left: 2px;
+}
+
+.passwordStrengthIndicatorDivision2 {
+  left: calc(20% + 2px);
+}
+
+.passwordStrengthIndicatorDivision3 {
+  left: calc(40% + 2px);
+}
+
+.passwordStrengthIndicatorDivision4 {
+  left: calc(60% + 2px);
+}
+
+.passwordStrengthIndicatorDivision5 {
+  left: calc(80% + 2px);
+}
+
+.passwordStrengthText {
+  font-size: 12px;
+  margin-top: 5px;
+}

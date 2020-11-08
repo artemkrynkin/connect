@@ -1,0 +1,31 @@
+.container {
+  margin: 0 auto;
+  max-width: 430px;
+}
+
+.card {
+  padding: 20px 40px;
+}
+
+.form {
+  margin-top: 15px;
+}
+
+.infoAboveForm {
+  margin-bottom: 25px;
+}
+
+.actionButtons > button:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.emailField > div,
+.emailField input,
+.emailField svg {
+  cursor: pointer !important;
+}
+
+.toggleVisiblePassword {
+  margin-right: -8px;
+  padding: 10px 8px;
+}

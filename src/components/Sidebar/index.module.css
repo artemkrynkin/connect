@@ -1,0 +1,67 @@
+.container {
+  background-color: var(--c-hex-slateGrey-4);
+  width: 230px;
+}
+
+.wrapper {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  color: rgba(var(--c-rgb-slateGrey-2), 0.6);
+  font-size: 20px;
+  font-weight: 700;
+  height: 50px;
+  padding: 14px 24px 13px 0;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 10px 10px 5px 0;
+  height: calc(100% - 50px);
+}
+
+.menuLink {
+  border-radius: 8px;
+  color: var(--c-hex-slateGrey-2);
+  display: flex;
+  padding: 12px 14px;
+  transition: background-color 50ms ease-out;
+}
+
+.menuLink:hover {
+  background-color: rgba(var(--c-rgb-slateGrey-2), 0.1);
+}
+
+.menuLink_active,
+.menuLink_active:hover {
+  background-color: var(--c-hex-slateGrey-5);
+  color: var(--c-hex-teal-A100);
+}
+
+.menuLink svg {
+  font-size: 16px;
+  opacity: 0.5;
+  margin-right: 12px;
+}
+
+.menuLink:hover svg {
+  opacity: 0.7;
+}
+
+.menuText {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.menuLink_active svg,
+.menuLink_active:hover svg,
+.menuLink_active .menuText,
+.menuLink_active:hover .menuText {
+  opacity: 1;
+}
