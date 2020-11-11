@@ -18,12 +18,13 @@ const user = (
 				isFetching: false,
 				data: action.payload,
 			};
-		case 'ERROR_USER':
+		case 'ERROR_USER': {
 			return {
 				...state,
 				isFetching: false,
 				error: action.payload,
 			};
+		}
 		default:
 			return state;
 	}

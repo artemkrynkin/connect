@@ -14,7 +14,7 @@ import Dropdown from 'src/components/Dropdown';
 
 import styles from './PersonalInfo.module.css';
 
-const PersonalInfo = props => {
+function PersonalInfo(props) {
 	const { deleteUserAvatar, onOpenDialogByName, currentUser } = props;
 	const refDropdownProfile = useRef(null);
 	const [dropdownPhotoProfile, setDropdownPhotoProfile] = useState(false);
@@ -85,6 +85,6 @@ const PersonalInfo = props => {
 			</Dropdown>
 		</div>
 	);
-};
+}
 
 export default PersonalInfo;

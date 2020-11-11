@@ -107,25 +107,3 @@ export const deleteUserAvatar = () => {
 			});
 	};
 };
-
-export const getCurrentMember = () => {
-	return async dispatch => {
-		dispatch({ type: 'REQUEST_MEMBER' });
-
-		return await axios
-			.post('/api/getCurrentMember')
-			.then(response => {
-				dispatch({
-					type: 'RECEIVE_MEMBER',
-					payload: response.data,
-				});
-
-				return Promise.resolve({ status: 'success' });
-			})
-			.catch(error => {
-				console.error(error.response);
-
-				return Promise.resolve({ status: 'error' });
-			});
-	};
-};

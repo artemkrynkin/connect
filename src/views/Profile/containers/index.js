@@ -5,20 +5,18 @@ import Container from '@material-ui/core/Container';
 import View from './View';
 
 const DialogPersonalInfoEdit = lazy(() => import('src/views/Dialogs/PersonalInfoEdit'));
-
 const DialogUserAvatarChange = lazy(() => import('src/views/Dialogs/UserAvatarChange'));
 
-const Index = props => {
-	// const { currentStudio, getMember } = props;
+function Index(props) {
 	const [dialogData, setDialogData] = useState({});
-	const [dialogOpenedName, setDialogOpenedName] = useState('');
+	// const [dialogOpenedName, setDialogOpenedName] = useState('');
 	const [dialogs, setDialogs] = useState({
 		personalInfoEdit: false,
 		userAvatarChange: false,
 	});
 
 	const onOpenDialogByName = (dialogName, dataType, data) => {
-		setDialogOpenedName(dialogName);
+		// setDialogOpenedName(dialogName);
 
 		setDialogs({
 			...dialogs,
@@ -40,16 +38,16 @@ const Index = props => {
 		});
 	};
 
-	const onExitedDialogByName = dataType => {
-		setDialogOpenedName('');
-
-		if (dataType) {
-			setDialogData({
-				...dialogData,
-				[dataType]: null,
-			});
-		}
-	};
+	// const onExitedDialogByName = dataType => {
+	// 	setDialogOpenedName('');
+	//
+	// 	if (dataType) {
+	// 		setDialogData({
+	// 			...dialogData,
+	// 			[dataType]: null,
+	// 		});
+	// 	}
+	// };
 
 	return (
 		<Container>
@@ -62,6 +60,6 @@ const Index = props => {
 			</Suspense>
 		</Container>
 	);
-};
+}
 
 export default Index;

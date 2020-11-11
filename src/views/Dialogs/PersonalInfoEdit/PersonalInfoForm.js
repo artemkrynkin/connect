@@ -11,7 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 import stylesGlobal from 'src/styles/globals.module.css';
 
-const PersonalInfoFormView = props => {
+function PersonalInfoFormView(props) {
 	const {
 		onCloseDialog,
 		formikProps: { submitForm, isSubmitting, errors, touched },
@@ -62,6 +62,6 @@ const PersonalInfoFormView = props => {
 			</DialogActions>
 		</>
 	);
-};
+}
 
 export default PersonalInfoFormView;

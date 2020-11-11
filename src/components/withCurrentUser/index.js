@@ -3,8 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
-import { getMyAccount, getCurrentMember } from 'src/actions/user';
-import { getStudios } from 'src/actions/studios';
+import { getMyAccount } from 'src/actions/user';
 
 const CurrentUserComponent = props => {
 	const {
@@ -33,8 +32,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		getMyAccount: () => dispatch(getMyAccount()),
-		getStudios: () => dispatch(getStudios()),
-		getCurrentMember: () => dispatch(getCurrentMember()),
 	};
 };
 

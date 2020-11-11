@@ -34,11 +34,9 @@ const Studio = new Schema({
 			},
 		},
 	},
-	// TODO: заменить параметр на stock
-	store: {
-		// TODO: заменить параметр на store
+	stock: {
 		// если есть платные позиции, то true, иначе false
-		shop: {
+		store: {
 			type: Boolean,
 			default: false,
 		},
@@ -47,8 +45,7 @@ const Studio = new Schema({
 			set: value => formatNumber(value, { fractionDigits: 0 }),
 			default: 0,
 		},
-		// TODO: заменить параметр на stockPrice
-		storePrice: {
+		stockPrice: {
 			type: Number,
 			set: value => formatNumber(value),
 			default: 0,

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 
-import { isAuthedResolver, hasPermissions } from 'api/utils/permissions';
+import { isAuthed, hasPermissions } from 'api/utils/permissions';
 
 import { memberRoleTransform } from 'shared/roles-access-rights';
 
@@ -9,13 +9,13 @@ import User from 'api/models/member';
 import Studio from 'api/models/studio';
 import Member from 'api/models/member';
 
-const membersRouter = Router();
+const router = Router();
 
 // const debug = require('debug')('api:products');
 
-membersRouter.post(
+router.post(
 	'/getMembers',
-	isAuthedResolver,
+	isAuthed,
 	(req, res, next) => hasPermissions(req, res, next, ['products.control']),
 	async (req, res, next) => {
 		const {
@@ -23,160 +23,173 @@ membersRouter.post(
 			query: { name, role },
 		} = req.body;
 
-		const conditions = {
-			studio: studioId,
-			confirmed: true,
-		};
+		try {
+			const conditions = {
+				studio: studioId,
+				confirmed: true,
+			};
 
-		if (role && !/all|owners|admins|artists/.test(role)) conditions._id = mongoose.Types.ObjectId(role);
+			if (role && !/all|owners|admins|artists/.test(role)) conditions._id = mongoose.Types.ObjectId(role);
 
-		const membersPromise = Member.find(conditions)
-			.lean()
-			.populate('user', 'avatar name email')
-			.catch(err => next({ code: 2, err }));
-		const membersRegularCountPromise = Member.countDocuments({ ...conditions, guest: false });
-		const membersGuestsCountPromise = Member.countDocuments({ ...conditions, guest: true });
+			const membersPromise = Member.find(conditions)
+				.lean()
+				.populate('user', 'picture name email');
+			const membersRegularCountPromise = Member.countDocuments({ ...conditions, guest: false });
+			const membersGuestsCountPromise = Member.countDocuments({ ...conditions, guest: true });
 
-		const members = await membersPromise;
-		const membersRegularCount = await membersRegularCountPromise;
-		const membersGuestsCount = await membersGuestsCountPromise;
+			let members = await membersPromise;
+			const membersRegularCount = await membersRegularCountPromise;
+			const membersGuestsCount = await membersGuestsCountPromise;
 
-		let membersTransform = members
-			.map(member => ({
-				...member,
-				roleBitMask: memberRoleTransform(member.roles, true),
-			}))
-			.sort((memberA, memberB) => +memberB.roleBitMask - +memberA.roleBitMask || memberA.user.name.localeCompare(memberB.user.name));
+			members = members
+				.map(member => ({
+					...member,
+					roleBitMask: memberRoleTransform(member.roles, true),
+				}))
+				.sort((memberA, memberB) => +memberB.roleBitMask - +memberA.roleBitMask || memberA.user.name.localeCompare(memberB.user.name));
 
-		if (role && /owners|admins|artists/.test(role)) {
-			const roleFilter = role.slice(0, -1);
+			if (role && /owners|admins|artists/.test(role)) {
+				const roleFilter = role.slice(0, -1);
 
-			membersTransform = membersTransform.filter(member => member.roles.some(role => role.includes(roleFilter)));
+				members = members.filter(member => member.roles.some(role => role.includes(roleFilter)));
+			}
+
+			if (name) {
+				members = members.filter(member => member.user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
+			}
+
+			res.json({
+				data: members,
+				paging: {
+					totalRegular: membersRegularCount,
+					totalGuests: membersGuestsCount,
+				},
+			});
+		} catch (err) {
+			next({ code: 2, err });
 		}
-
-		if (name) {
-			membersTransform = membersTransform.filter(member => member.user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
-		}
-
-		res.json({
-			data: membersTransform,
-			paging: {
-				totalRegular: membersRegularCount,
-				totalGuests: membersGuestsCount,
-			},
-		});
 	}
 );
 
-membersRouter.post(
+router.post(
 	'/getMember',
-	isAuthedResolver,
+	isAuthed,
 	(req, res, next) => hasPermissions(req, res, next, ['products.control']),
 	async (req, res, next) => {
 		const {
 			params: { memberId },
 		} = req.body;
 
-		Member.findById(memberId)
-			.populate('user', 'avatar name email')
-			.then(member => res.json(member))
-			.catch(err => next({ code: 2, err }));
+		try {
+			const member = await Member.findById(memberId).populate('user', 'picture name email');
+
+			res.json(member);
+		} catch (err) {
+			next({ code: 2, err });
+		}
 	}
 );
 
-membersRouter.post(
-	'/invitationMember',
-	isAuthedResolver,
+router.post(
+	'/userInvitationByQr',
+	isAuthed,
 	(req, res, next) => hasPermissions(req, res, next, ['studio.control']),
 	async (req, res, next) => {
 		const { studioId } = req.body;
 
-		const newMember = new Member({
-			studio: studioId,
-		});
+		try {
+			const newMember = new Member({
+				studio: studioId,
+			});
 
-		const newMemberErr = newMember.validateSync();
+			const newMemberErr = newMember.validateSync();
 
-		if (newMemberErr) return next({ code: newMemberErr.errors ? 5 : 2, err: newMemberErr });
+			if (newMemberErr) return next({ code: newMemberErr.errors ? 5 : 2, err: newMemberErr });
 
-		const member = await newMember.save();
+			await Promise.all(newMember.save(), Studio.findByIdAndUpdate(studioId, { $push: { members: newMember } }));
 
-		Studio.findByIdAndUpdate(studioId, { $push: { members: newMember } }).catch(err => next({ code: 2, err }));
-
-		Member.populate(member, { path: 'user', select: 'avatar name email' })
-			.then(member => res.json(member))
-			.catch(err => next({ code: 2, err }));
+			res.json(newMember);
+		} catch (err) {
+			next({ code: 2, err });
+		}
 	}
 );
 
-membersRouter.post('/confirmInvitationMember', async (req, res, next) => {
+router.post('/linkUserAndStudio', isAuthed, async (req, res, next) => {
 	const { studioId, memberId } = req.body;
 
-	const newUser = new User({
-		activeStudio: studioId,
-		activeMember: memberId,
-	});
+	try {
+		const user = await User.findOne({ auth0uid: req.user.sub })
+			.lean()
+			.then(user => (!user ? throw new Error('User not found') : user));
 
-	const newUserErr = newUser.validateSync();
-
-	if (newUserErr) return next({ code: newUserErr.errors ? 5 : 2, err: newUserErr });
-
-	const user = await newUserErr.save();
-
-	Member.findByIdAndUpdate(memberId, { $set: { user: user._id } }).catch(err => next({ code: 2, err }));
-	Studio.findByIdAndUpdate(studioId, { $push: { users: newUser } }).catch(err => next({ code: 2, err }));
-
-	User.findById(user._id, { salt: false, hashedPassword: false })
-		.then(user => {
-			// return res.json({
-			//   userId: user._id,
-			//   stockId: stock._id,
-			//   role: member.role,
-			// });
-		})
-		.catch(err => next(err));
-});
-
-membersRouter.post(
-	'/editMember',
-	isAuthedResolver,
-	(req, res, next) => hasPermissions(req, res, next, ['studio.control']),
-	async (req, res, next) => {
-		const {
-			params: { memberId },
-			data: { member: memberEdited },
-		} = req.body;
-
-		let setMemberData = memberEdited;
-
-		if (/owner|admin/.test(setMemberData.roles) && !/artist/.test(setMemberData.roles)) {
-			setMemberData.purchaseExpenseStudio = true;
-			setMemberData.markupPosition = false;
+		if (!user.settings.studio && !user.settings.member) {
+			user.settings.studio = studioId;
+			user.settings.member = memberId;
 		}
 
-		const member = await Member.findByIdAndUpdate(memberId, { $set: setMemberData }, { new: true, runValidators: true })
-			.populate('user', 'avatar name email')
-			.catch(err => next({ code: 2, err }));
+		const userErr = user.validateSync();
 
-		res.json(member);
+		if (userErr) return next({ code: userErr.errors ? 5 : 2, err: userErr });
+
+		await Promise.all(
+			user.save(),
+			Member.findByIdAndUpdate(memberId, { $set: { user: user._id } }),
+			Studio.findByIdAndUpdate(studioId, { $push: { users: user._id } })
+		);
+	} catch (err) {
+		next({ code: 2, err });
+	}
+});
+
+router.post(
+	'/editMember',
+	isAuthed,
+	(req, res, next) => hasPermissions(req, res, next, ['studio.control']),
+	async (req, res, next) => {
+		const {
+			params: { memberId },
+			data: { member: memberValues },
+		} = req.body;
+
+		try {
+			if (/owner|admin/.test(memberValues.roles) && !/artist/.test(memberValues.roles)) {
+				memberValues.purchaseExpenseStudio = true;
+				memberValues.markupPosition = false;
+			}
+
+			const member = await Member.findByIdAndUpdate(memberId, { $set: memberValues }, { new: true, runValidators: true }).populate(
+				'user',
+				'avatar name email'
+			);
+
+			res.json(member);
+		} catch (err) {
+			next({ code: 2, err });
+		}
 	}
 );
 
-membersRouter.post(
+router.post(
 	'/deactivatedMember',
-	isAuthedResolver,
+	isAuthed,
 	(req, res, next) => hasPermissions(req, res, next, ['studio.control']),
 	async (req, res, next) => {
 		const {
 			params: { memberId },
 		} = req.body;
 
-		const member = await Member.findByIdAndUpdate(memberId, { $set: { deactivated: true } }, { new: true, runValidators: true })
-			.populate('user', 'avatar name email')
-			.catch(err => next({ code: 2, err }));
+		try {
+			const member = await Member.findByIdAndUpdate(memberId, { $set: { deactivated: true } }, { new: true, runValidators: true }).populate(
+				'user',
+				'avatar name email'
+			);
 
-		res.json(member);
+			res.json(member);
+		} catch (err) {
+			next({ code: 2, err });
+		}
 	}
 );
 
-export default membersRouter;
+export default router;

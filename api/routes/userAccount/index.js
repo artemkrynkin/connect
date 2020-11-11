@@ -10,7 +10,6 @@ import { isAuthed } from 'api/utils/permissions';
 import { mergedUserAccounts } from 'api/utils/auth';
 
 import User from 'api/models/user';
-import Member from 'api/models/member';
 
 const router = Router();
 const upload = uploadAvatar.single('file');
@@ -22,10 +21,7 @@ router.post('/getMyAccount', isAuthed, async (req, res, next) => {
 		const auth0user = await auth0management.getUser({ id: req.user.sub });
 		const user = await User.findOne({ auth0uid: req.user.sub })
 			.lean()
-			.then(user => {
-				if (!user) throw new Error('User not found');
-				else return user;
-			});
+			.then(user => (!user ? throw new Error('User not found') : user));
 		const userAccount = mergedUserAccounts(auth0user, user);
 
 		res.json(userAccount);
@@ -72,10 +68,7 @@ router.post(
 		try {
 			const user = await User.findOne({ auth0uid: req.user.sub })
 				.lean()
-				.then(user => {
-					if (!user) throw new Error('User not found');
-					else return user;
-				});
+				.then(user => (!user ? throw new Error('User not found') : user));
 
 			await sharp(file.path)
 				.resize(300, 300)
@@ -121,10 +114,7 @@ router.get('/deleteUserAvatar', isAuthed, async (req, res, next) => {
 		const auth0user = await auth0management.getUser({ id: req.user.sub });
 		const user = await User.findOne({ auth0uid: req.user.sub })
 			.lean()
-			.then(user => {
-				if (!user) throw new Error('User not found');
-				else return user;
-			});
+			.then(user => (!user ? throw new Error('User not found') : user));
 
 		await fs.unlink(rootFolder + user.picture.replace(avatarDomain, ''), err => {
 			if (err) throw new Error(err);
@@ -144,16 +134,6 @@ router.get('/deleteUserAvatar', isAuthed, async (req, res, next) => {
 	} catch (err) {
 		next({ code: 2, err });
 	}
-});
-
-router.post('/getCurrentMember', isAuthed, async (req, res, next) => {
-	const user = await User.findOne({ auth0uid: req.user.sub })
-		.lean()
-		.catch(err => next({ code: 2, err }));
-
-	const member = user?.settings?.member ? await Member.findById(user.settings.member).catch(err => next({ code: 2, err })) : null;
-
-	res.json(member);
 });
 
 export default router;

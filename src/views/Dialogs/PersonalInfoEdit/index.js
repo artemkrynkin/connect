@@ -13,7 +13,7 @@ import { enqueueSnackbar } from 'src/actions/snackbars';
 import PersonalInfoForm from './PersonalInfoForm';
 import personalInfoSchema from './personalInfoSchema';
 
-const PersonalInfoEdit = props => {
+function PersonalInfoEdit(props) {
 	const { dialogOpen, onCloseDialog, currentUser } = props;
 
 	const initialValues = {
@@ -57,18 +57,12 @@ const PersonalInfoEdit = props => {
 			</Formik>
 		</Dialog>
 	);
-};
+}
 
 PersonalInfoEdit.propTypes = {
 	dialogOpen: PropTypes.bool.isRequired,
 	onCloseDialog: PropTypes.func.isRequired,
 };
-
-// const mapStateToProps = (state, ownProps) => {
-//   const { type, selectedPosition } = ownProps;
-//
-//   return stateReturn;
-// };
 
 const mapDispatchToProps = dispatch => {
 	return {

@@ -11,11 +11,11 @@ const routes = [
 		name: 'Профиль',
 		icon: null,
 	},
-	{
-		path: '/studios',
-		name: 'Студии',
-		icon: null,
-	},
+	// {
+	// 	path: '/studios',
+	// 	name: 'Студии',
+	// 	icon: null,
+	// },
 	// {
 	// 	path: '/subscriptions',
 	// 	name: 'Подписки',

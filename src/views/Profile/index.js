@@ -15,9 +15,7 @@ const layoutMetaInfo = {
 	pageName: 'profile',
 };
 
-const Profile = props => {
-	// const { currentStudio } = props;
-
+function Profile(props) {
 	return (
 		<Layout metaInfo={layoutMetaInfo}>
 			<div className={ClassNames(styles.container, stylesPage.pageContent)}>
@@ -25,7 +23,7 @@ const Profile = props => {
 			</div>
 		</Layout>
 	);
-};
+}
 
 const mapDispatchToProps = dispatch => {
 	return {

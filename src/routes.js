@@ -22,6 +22,7 @@ import Signup from 'src/views/Signup';
 import Login from 'src/views/Login';
 import PasswordReset from 'src/views/PasswordReset';
 import Profile from 'src/views/Profile';
+// import Studios from 'src/views/Studios';
 import PageNotFound from 'src/views/PageNotFound';
 
 import AuthViewHandler from './components/authViewHandler';
@@ -35,6 +36,10 @@ const PasswordResetFallback = signedOutFallback(() => <Redirect to="/profile" />
 const ProfileFallback = signedOutFallback(Profile, () => (
 	<Redirect to={{ pathname: '/login', search: `?returnTo=${CLIENT_URL}/profile` }} />
 ));
+
+// const StudiosFallback = signedOutFallback(Studios, () => (
+// 	<Redirect to={{ pathname: '/login', search: `?returnTo=${CLIENT_URL}/studios` }} />
+// ));
 
 const snackbarSettings = {
 	maxSnack: 5,
@@ -102,7 +107,7 @@ const Routes = props => {
 						<Route path="/password-reset" component={PasswordResetFallback} />
 
 						<Route path="/profile" component={ProfileFallback} />
-						{/*<Route path={['/members/:memberId', '/members/:memberId/']} component={MemberFallback} exact />*/}
+						{/*<Route path="/studios" component={StudiosFallback} />*/}
 
 						<Route path="*" component={PageNotFound} />
 					</Switch>

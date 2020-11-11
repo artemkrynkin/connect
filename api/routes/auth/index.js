@@ -14,56 +14,58 @@ const router = Router();
 router.post('/checkUsername', async (req, res, next) => {
 	const { email } = req.body;
 
-	return auth0management
-		.getUsersByEmail(email)
-		.then(users => {
-			if (users.length) return res.json({ action: 'noAction' });
-			else return res.json({ action: 'signup' });
-		})
-		.catch(err => next({ code: 2, err }));
+	try {
+		const auth0users = await auth0management.getUsersByEmail(email);
+
+		res.json({
+			action: auth0users.length ? 'noAction' : 'signup',
+		});
+	} catch (err) {
+		next({ code: 2, err });
+	}
 });
 
 router.post('/signup', async (req, res, next) => {
 	const { email, name, password } = req.body;
 
-	let auth0userError;
-	const auth0user = await auth0client.database
-		.signUp({
-			email,
-			name,
-			password,
-			connection: 'Username-Password-Authentication',
-		})
-		.catch(err => {
-			auth0userError = JSON.parse(err.originalError.response.text);
+	try {
+		const auth0user = await auth0client.database
+			.signUp({
+				email,
+				name,
+				password,
+				connection: 'Username-Password-Authentication',
+			})
+			.catch(err => {
+				throw new Error(JSON.parse(err.originalError.response.text));
+			});
+
+		const newUser = new User({
+			auth0uid: `auth0|${auth0user._id}`,
+			name: auth0user.name,
 		});
 
-	if (auth0userError) {
-		if (auth0userError?.code === 'invalid_signup') {
-			return auth0management
-				.getUsersByEmail(email)
-				.then(users => {
-					if (users.length) return res.json({ action: 'login', infoCode: 'existingUser' });
-					else return next({ code: 2, auth0userError });
-				})
-				.catch(err => next({ code: 2, err }));
+		const newUserErr = newUser.validateSync();
+
+		if (newUserErr) return next({ code: newUserErr.errors ? 5 : 2, err: newUserErr });
+
+		await newUser.save();
+
+		res.json();
+	} catch (err) {
+		if (err?.code === 'invalid_signup') {
+			try {
+				const auth0users = await auth0management.getUsersByEmail(email);
+
+				if (!auth0users.length) next({ code: 2, err });
+				else res.json({ action: 'login', infoCode: 'existingUser' });
+			} catch (err) {
+				next({ code: 2, err });
+			}
 		} else {
-			return next({ code: 2, err: auth0userError });
+			next({ code: 2, err });
 		}
 	}
-
-	const newUser = new User({
-		auth0uid: `auth0|${auth0user._id}`,
-		name: auth0user.name,
-	});
-
-	const newUserErr = newUser.validateSync();
-
-	if (newUserErr) return next({ code: newUserErr.errors ? 5 : 2, err: newUserErr });
-
-	await newUser.save();
-
-	res.json();
 });
 
 router.get('/loginCallback', async (req, res) => {
@@ -102,7 +104,7 @@ router.get('/loginCallback', async (req, res) => {
 		resetLogin('/login', error_description);
 	}
 
-	return res.redirect(redirectUrl.href);
+	res.redirect(redirectUrl.href);
 });
 
 router.get('/logout', async (req, res) => {

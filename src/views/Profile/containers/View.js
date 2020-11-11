@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import PersonalInfo from './PersonalInfo';
 
-const View = props => {
+function View(props) {
 	const { deleteUserAvatar, onOpenDialogByName, currentUser } = props;
 
 	return (
@@ -10,6 +10,6 @@ const View = props => {
 			<PersonalInfo deleteUserAvatar={deleteUserAvatar} onOpenDialogByName={onOpenDialogByName} currentUser={currentUser} />
 		</Fragment>
 	);
-};
+}
 
 export default View;
