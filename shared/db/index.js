@@ -9,7 +9,7 @@ const debug = require('debug')('shared:mongodb');
 const IS_PROD = process.env.NODE_ENV === 'production';
 
 const uri = IS_PROD
-	? 'mongodb://artem:741310PTppl#@rc1c-r70mh0q5hyyvlo3i.mdb.yandexcloud.net:27018/blikside-alpha'
+	? 'mongodb://artem:741310PTppl#@rc1c-r70mh0q5hyyvlo3i.mdb.yandexcloud.net:27018/account-keeberink'
 	: 'mongodb://localhost:27017/accountkeeberink-local';
 
 mongoose.Promise = bluebird;
