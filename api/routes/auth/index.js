@@ -115,7 +115,9 @@ router.get('/logout', async (req, res) => {
 	redirectUrl.searchParams.append('client_id', config.clientId);
 	redirectUrl.searchParams.append('returnTo', returnTo || FALLBACK_URL);
 
-	res.clearCookie('session.token');
+	res.clearCookie('session.token', {
+		domain: IS_PROD ? '.keeberink.com' : '',
+	});
 
 	return res.redirect(redirectUrl.href);
 });

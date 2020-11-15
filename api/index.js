@@ -15,7 +15,6 @@ import toobusy from 'shared/middlewares/toobusy';
 
 import router from './routes';
 import middlewares from './routes/middlewares';
-// import './cron';
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3003;
 

@@ -30,7 +30,7 @@ const layoutMetaInfo = {
 
 const PasswordReset = props => {
 	const { location } = props;
-	const [passwordResetEmailSent, setPasswordResetEmailSent] = useState(true);
+	const [passwordResetEmailSent, setPasswordResetEmailSent] = useState(false);
 
 	const searchObj = queryString.parse(location?.search);
 
