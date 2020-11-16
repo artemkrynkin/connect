@@ -7,17 +7,18 @@
 }
 
 .googleLogo,
-.yandexLogo,
+/*.yandexLogo,*/
 .facebookLogo,
-.vkLogo {
+/*.vkLogo,*/
+.appleLogo {
   font-size: 20px !important;
   height: 20px;
   width: 20px;
 }
 
-.googleLogo {
+/*.googleLogo {*/
 
-}
+/*}*/
 
 .yandexLogo {
   color: #ff0102;
@@ -27,6 +28,11 @@
   color: #1b77f2;
 }
 
-.vkLogo {
+/*.vkLogo {*/
 
+/*}*/
+
+.appleLogo {
+  color: black;
+  margin-top: -3px;
 }

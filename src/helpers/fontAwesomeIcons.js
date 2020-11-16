@@ -7,7 +7,7 @@ import {
 	falReceiptsMissing as falcReceiptsMissing,
 } from './fontAwecomeCustomIcons';
 
-import { faYandex, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faYandex, faFacebook, faApple } from '@fortawesome/free-brands-svg-icons';
 
 import {
 	faAngleLeft as fasAngleLeft,
@@ -124,6 +124,7 @@ library.add(
 	// Brands
 	faYandex,
 	faFacebook,
+	faApple,
 
 	// Solid
 	fasAngleLeft,

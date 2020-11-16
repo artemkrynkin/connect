@@ -8,7 +8,6 @@ const DEV_CONFIG = {
 	domain: 'keeberinklocal.eu.auth0.com',
 	audience: 'https://keeberinklocal.eu.auth0.com/api/v2/',
 	redirectUri: 'http://localhost:3003/auth/loginCallback',
-	jwksUri: 'https://keeberinklocal.eu.auth0.com/.well-known/jwks.json',
 	issuer: 'https://keeberinklocal.eu.auth0.com/',
 };
 
@@ -19,7 +18,6 @@ const PRODUCTION_CONFIG = {
 	domain: 'keeberinkdev.eu.auth0.com',
 	audience: 'https://keeberinkdev.eu.auth0.com/api/v2/',
 	redirectUri: 'https://account.keeberink.com/auth/loginCallback',
-	jwksUri: 'https://keeberinkdev.eu.auth0.com/.well-known/jwks.json',
 	issuer: 'https://keeberinkdev.eu.auth0.com/',
 };
 

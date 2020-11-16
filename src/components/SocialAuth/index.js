@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { ReactComponent as GoogleLogo } from 'public/img/other/google_logo.svg';
-import { ReactComponent as VkLogo } from 'public/img/other/vk_logo.svg';
+import { ReactComponent as GoogleLogo } from 'public/img/other/logos/google_logo.svg';
+// import { ReactComponent as VkLogo } from 'public/img/other/logos/vk_logo.svg';
 import styles from './index.module.css';
 
 const SocialAuth = () => (
@@ -29,14 +29,14 @@ const SocialAuth = () => (
 				<Button variant="outlined" startIcon={<GoogleLogo className={styles.googleLogo} />} fullWidth disabled>
 					Войти с помощью Google
 				</Button>
-				<Button
-					variant="outlined"
-					startIcon={<FontAwesomeIcon className={styles.yandexLogo} icon={['fab', 'yandex']} />}
-					fullWidth
-					disabled
-				>
-					Войти с помощью Яндекс
-				</Button>
+				{/*<Button*/}
+				{/*	variant="outlined"*/}
+				{/*	startIcon={<FontAwesomeIcon className={styles.yandexLogo} icon={['fab', 'yandex']} />}*/}
+				{/*	fullWidth*/}
+				{/*	disabled*/}
+				{/*>*/}
+				{/*	Войти с помощью Яндекс*/}
+				{/*</Button>*/}
 				<Button
 					variant="outlined"
 					startIcon={<FontAwesomeIcon className={styles.facebookLogo} icon={['fab', 'facebook']} />}
@@ -45,9 +45,12 @@ const SocialAuth = () => (
 				>
 					Войти с помощью Facebook
 				</Button>
-				<Button variant="outlined" startIcon={<VkLogo className={styles.vkLogo} />} fullWidth disabled>
-					Войти с помощью ВКонтакте
+				<Button variant="outlined" startIcon={<FontAwesomeIcon className={styles.appleLogo} icon={['fab', 'apple']} />} fullWidth disabled>
+					Войти с помощью Apple
 				</Button>
+				{/*<Button variant="outlined" startIcon={<VkLogo className={styles.vkLogo} />} fullWidth disabled>*/}
+				{/*	Войти с помощью ВКонтакте*/}
+				{/*</Button>*/}
 			</Grid>
 		</Tooltip>
 	</>

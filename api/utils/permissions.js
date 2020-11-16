@@ -12,7 +12,7 @@ export const isAuthed = jwt({
 		cache: true,
 		rateLimit: true,
 		jwksRequestsPerMinute: 10,
-		jwksUri: config.jwksUri,
+		jwksUri: `${config.issuer}.well-known/jwks.json`,
 	}),
 	audience: 'https://keeberink-api',
 	issuer: config.issuer,
