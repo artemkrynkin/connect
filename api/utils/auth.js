@@ -9,12 +9,14 @@ export const auth0client = new AuthenticationClient({
 	domain: config.domain,
 	clientId: config.clientId,
 	clientSecret: config.clientSecret,
+	audience: config.audience,
 });
 
 export const auth0management = new ManagementClient({
 	domain: config.domain,
 	clientId: config.clientId,
 	clientSecret: config.clientSecret,
+	audience: config.audience,
 });
 
 export const mergedUserAccounts = (auth0user, user) => {

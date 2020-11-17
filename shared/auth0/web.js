@@ -11,7 +11,7 @@ const DEV_CONFIG = {
 const PRODUCTION_CONFIG = {
 	dbConnectionName: 'Username-Password-Authentication',
 	clientId: '4pmdOXEv0seOwvHscw6vUE8VnzQESUWA',
-	domain: 'keeberinkdev.eu.auth0.com',
+	domain: 'auth.keeberink.com',
 	audience: 'https://keeberink-api',
 	redirectUri: 'https://account.keeberink.com/auth/loginCallback',
 };
