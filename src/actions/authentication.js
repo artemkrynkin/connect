@@ -18,7 +18,7 @@ export const checkUsername = ({ data: { email } }) => {
 			.catch(error => {
 				console.error(error.response);
 
-				return Promise.resolve({ status: 'error', data: error.response.data });
+				return Promise.reject({ status: 'error', data: error.response.data });
 			});
 	};
 };
@@ -33,7 +33,7 @@ export const signup = ({ data }) => {
 			.catch(error => {
 				console.error(error.response);
 
-				return Promise.resolve({ status: 'error', data: error.response.data });
+				return Promise.reject({ status: 'error', data: error.response.data });
 			});
 	};
 };
@@ -58,7 +58,7 @@ export const login = ({ data: { email, password, returnTo } }) => {
 			);
 		});
 
-		return Promise.resolve({ status: 'error', data: loginResponse?.original });
+		return Promise.reject({ status: 'error', data: loginResponse?.original });
 	};
 };
 
@@ -70,10 +70,9 @@ export const resetPassword = ({ data }) => {
 				return Promise.resolve({ status: 'success' });
 			})
 			.catch(error => {
-				console.log(1);
 				console.error(error.response);
 
-				return Promise.resolve({ status: 'error', data: error.response.data });
+				return Promise.reject({ status: 'error', data: error.response.data });
 			});
 	};
 };

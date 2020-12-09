@@ -52,9 +52,7 @@ router.post('/createStudio', isAuthed, async (req, res, next) => {
 	} = req.body;
 
 	try {
-		const user = await User.findOne({ auth0uid: req.user.sub })
-			.lean()
-			.then(user => (!user ? throw new Error('User not found') : user));
+		const user = await User.findOne({ auth0uid: req.user.sub }).then(user => (!user ? throw new Error('User not found') : user));
 
 		const newStudio = new Studio({
 			...newStudioValues,
@@ -85,7 +83,12 @@ router.post('/createStudio', isAuthed, async (req, res, next) => {
 
 		await Promise.all([user.save(), newStudio.save(), newMember.save()]);
 
-		res.json(newStudio);
+		await user.populate('settings.member').execPopulate();
+
+		res.json({
+			user,
+			studio: newStudio,
+		});
 	} catch (err) {
 		next({ code: 2, err });
 	}

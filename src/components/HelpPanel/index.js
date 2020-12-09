@@ -27,6 +27,8 @@ const HelpPanel = props => {
 
 	return (
 		<div className={styles.container}>
+			<span className={styles.containerShadow} />
+
 			<Grid className={styles.wrapper} direction="column" justify="space-between" alignItems="center" container>
 				<Link className={styles.logo} to="/" />
 				<Tooltip title={currentUser.name}>

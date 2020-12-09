@@ -20,25 +20,23 @@ function PersonalInfoEdit(props) {
 		name: currentUser.name,
 	};
 
-	const onSubmit = (values, actions) => {
+	const onSubmit = async values => {
 		const { onCloseDialog } = props;
 
 		const personalInfo = personalInfoSchema.cast(values);
 
-		props.editPersonalInfo(personalInfo).then(response => {
-			actions.setSubmitting(false);
+		try {
+			await props.editPersonalInfo(personalInfo);
 
-			if (response.status === 'success') {
-				onCloseDialog();
-			} else {
-				props.enqueueSnackbar({
-					message: response.message || 'Неизвестная ошибка.',
-					options: {
-						variant: 'error',
-					},
-				});
-			}
-		});
+			onCloseDialog();
+		} catch (error) {
+			props.enqueueSnackbar({
+				message: error.data.message || 'Неизвестная ошибка.',
+				options: {
+					variant: 'error',
+				},
+			});
+		}
 	};
 
 	return (

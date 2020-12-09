@@ -50,12 +50,21 @@ const Login = props => {
 		returnTo: searchObj.returnTo || '',
 	};
 
+	const onEnqueueSnackbarError = message => {
+		props.enqueueSnackbar({
+			message: message || 'Неизвестная ошибка.',
+			options: {
+				variant: 'error',
+			},
+		});
+	};
+
 	const onToggleStepLogin = value => {
 		setStepLogin(value);
 		setTimeout(() => (value ? passwordFieldRef.current.focus() : emailFieldRef.current.focus()), 0);
 	};
 
-	const onSubmit = (values, actions) => {
+	const onSubmit = async (values, actions) => {
 		history.replace({
 			pathname: '/login',
 			search: queryString.stringify({
@@ -64,53 +73,35 @@ const Login = props => {
 			}),
 		});
 
-		if (stepLogin) {
-			props.login(values).then(({ status, data }) => {
-				actions.setSubmitting(false);
+		try {
+			if (stepLogin) {
+				await props.login(values);
+			} else {
+				const checkUsernameResponse = await props.checkUsername(values);
 
-				if (status === 'error' && data?.error === 'access_denied') {
-					actions.setErrors({
-						emailOrPassword: true,
-					});
-				}
-			});
-		} else {
-			props.checkUsername(values).then(({ status, data }) => {
-				actions.setSubmitting(false);
-
-				if (status === 'success') {
-					if (data.action === 'noAction') {
-						onToggleStepLogin(true);
-					} else {
-						history.push({
-							pathname: '/signup',
-							search: history.location.search,
-						});
-					}
+				if (checkUsernameResponse.data.action === 'noAction') {
+					onToggleStepLogin(true);
 				} else {
-					props.enqueueSnackbar({
-						message: data.error_description || 'Неизвестная ошибка.',
-						options: {
-							variant: 'error',
-						},
+					history.push({
+						pathname: '/signup',
+						search: history.location.search,
 					});
 				}
-			});
+			}
+		} catch (error) {
+			if (error.status === 'error' && error.data.error === 'access_denied') {
+				actions.setErrors({ emailOrPassword: true });
+			} else {
+				onEnqueueSnackbarError(error.data.error_description);
+			}
 		}
 	};
 
 	useEffect(() => {
 		if (searchObj.snackbarMessage && searchObj.snackbarType) {
-			props
-				.enqueueSnackbar({
-					message: searchObj.snackbarMessage || 'Неизвестная ошибка.',
-					options: {
-						variant: searchObj.snackbarType,
-					},
-				})
-				.then(() => {
-					history.replace('/login');
-				});
+			onEnqueueSnackbarError(searchObj.snackbarMessage);
+
+			history.replace('/login');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

@@ -19,27 +19,25 @@ function UserAvatarChange(props) {
 		file: undefined,
 	};
 
-	const onSubmit = (values, actions) => {
+	const onSubmit = async values => {
 		const { onCloseDialog } = props;
 
 		const formData = new FormData();
 
 		formData.append('file', values.file);
 
-		props.changeUserAvatar(formData).then(response => {
-			actions.setSubmitting(false);
+		try {
+			await props.changeUserAvatar(formData);
 
-			if (response.status === 'success') {
-				onCloseDialog();
-			} else {
-				props.enqueueSnackbar({
-					message: response.message || 'Неизвестная ошибка.',
-					options: {
-						variant: 'error',
-					},
-				});
-			}
-		});
+			onCloseDialog();
+		} catch (error) {
+			props.enqueueSnackbar({
+				message: error.data || 'Неизвестная ошибка.',
+				options: {
+					variant: 'error',
+				},
+			});
+		}
 	};
 
 	return (

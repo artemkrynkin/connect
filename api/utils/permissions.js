@@ -2,10 +2,9 @@ import jwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
 
 import { checkPermissions } from 'shared/roles-access-rights';
+import { config } from 'shared/auth0/api';
 
 import Member from 'api/models/member';
-
-import { config } from 'shared/auth0/api';
 
 export const isAuthed = jwt({
 	secret: jwksRsa.expressJwtSecret({

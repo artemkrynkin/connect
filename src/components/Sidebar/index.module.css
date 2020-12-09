@@ -1,6 +1,6 @@
 .container {
   background-color: var(--c-hex-slateGrey-4);
-  width: 230px;
+  width: 240px;
 }
 
 .wrapper {
@@ -15,14 +15,14 @@
   font-size: 20px;
   font-weight: 700;
   height: 50px;
-  padding: 14px 24px 13px 0;
+  padding: 14px 24px 13px 14px;
 }
 
 .menu {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding: 10px 10px 5px 0;
+  padding: 10px 10px 5px;
   height: calc(100% - 50px);
 }
 

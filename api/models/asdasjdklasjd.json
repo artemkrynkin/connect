@@ -1,0 +1,462 @@
+{
+  "lang": "ru",
+  "user": {
+    "yandexuid": "9000484721563442669",
+    "avatarHost": "https://avatars.mds.yandex.net",
+    "uid": "231996549",
+    "login": "pages.topll",
+    "lang": "ru",
+    "displayName": "Артём",
+    "avatarId": "20706/enc-cf1b78a95fa45a34ee3b27758fa3e734e0ce88243222f0bac1426bbb9ad280da",
+    "status": "VALID",
+    "email": "pages.topll@yandex.ru",
+    "2fa": false,
+    "accounts": [
+      {
+        "uid": "231996549",
+        "login": "pages.topll",
+        "lang": "ru",
+        "displayName": "Артём",
+        "avatarId": "20706/enc-cf1b78a95fa45a34ee3b27758fa3e734e0ce88243222f0bac1426bbb9ad280da",
+        "status": "VALID",
+        "email": "pages.topll@yandex.ru",
+        "2fa": false,
+        "yandexuid": "9000484721563442669",
+        "avatarHost": "https://avatars.mds.yandex.net"
+      },
+      {
+        "uid": "1130000045479529",
+        "login": "internal_account@keeberink.com",
+        "lang": "ru",
+        "displayName": "internal_account@keeberink.com",
+        "avatarId": "0/0-0",
+        "status": "VALID",
+        "email": "internal_account@keeberink.com",
+        "2fa": false,
+        "yandexuid": "9000484721563442669",
+        "avatarHost": "https://avatars.mds.yandex.net"
+      },
+      {
+        "uid": "1130000046702575",
+        "login": "no-reply@keeberink.com",
+        "lang": "ru",
+        "displayName": "no-reply@keeberink.com",
+        "avatarId": "0/0-0",
+        "status": "VALID",
+        "email": "no-reply@keeberink.com",
+        "2fa": false,
+        "yandexuid": "9000484721563442669",
+        "avatarHost": "https://avatars.mds.yandex.net"
+      },
+      {
+        "uid": "1130000036307235",
+        "login": "info@animaltattooer.com",
+        "lang": "ru",
+        "displayName": "Наташа ANIMAL",
+        "avatarId": "38135/lc2iNc4qxEbLq0GQmLBWImop8nA-1",
+        "status": "VALID",
+        "email": "info@animaltattooer.com",
+        "2fa": false,
+        "yandexuid": "9000484721563442669",
+        "avatarHost": "https://avatars.mds.yandex.net"
+      }
+    ]
+  },
+  "userSettings": {
+    "bannerSettings": {
+      "analytics-lp-NO-BA-01-12-oct": {
+        "counter": 1,
+        "status": "skipped",
+        "updatedAt": 1601638953965
+      },
+      "black-friday-09-22-nov-no-ba": {
+        "counter": 1,
+        "status": "skipped",
+        "updatedAt": 1605006718067
+      },
+      "cvos-promo-27-09-nov-no-ba": {
+        "counter": 0,
+        "status": "showed",
+        "updatedAt": 1604064562056
+      },
+      "kafka-30-06-dec-all": {
+        "counter": 1,
+        "status": "skipped",
+        "updatedAt": 1606998140550
+      },
+      "research-16-29-nov-all": {
+        "counter": 0,
+        "status": "showed",
+        "updatedAt": 1606397561044
+      }
+    },
+    "cloudId": "b1g14658d6gfvdsstr7d",
+    "email": "pages.topll@yandex.ru",
+    "emailConfirmed": true,
+    "folderId": "b1gj85t4rd5pbe38mu1j",
+    "language": "ru",
+    "phone": "79295394780",
+    "tableSettings": {
+      "compute-disks": [
+        {
+          "id": "name",
+          "isSelected": true,
+          "title": "Имя"
+        },
+        {
+          "id": "type",
+          "isSelected": true,
+          "title": "Тип"
+        },
+        {
+          "id": "size",
+          "isSelected": true,
+          "title": "Размер"
+        },
+        {
+          "id": "status",
+          "isSelected": true,
+          "title": "Статус"
+        },
+        {
+          "id": "vm",
+          "isSelected": true,
+          "title": "Виртуальные машины"
+        },
+        {
+          "id": "zone",
+          "isSelected": true,
+          "title": "Зона доступности"
+        },
+        {
+          "id": "created",
+          "isSelected": true,
+          "title": "Дата создания"
+        }
+      ],
+      "iam-users-table": [
+        {
+          "id": "user",
+          "isSelected": true,
+          "title": "Пользователь"
+        },
+        {
+          "id": "id",
+          "isSelected": true,
+          "title": "ID"
+        },
+        {
+          "id": "federation",
+          "isSelected": false,
+          "title": "Федерация"
+        },
+        {
+          "id": "roles",
+          "isSelected": true,
+          "title": "Роли на выбранное облако"
+        }
+      ]
+    },
+    "theme": "light",
+    "tld": "ru"
+  },
+  "csrfToken": "e8f44edcbaa7c43c93b985f74dcb5ceb5f648e89:1607535514",
+  "clouds": [
+    {
+      "createdAt": "2018-12-20T11:45:10+00:00",
+      "description": "",
+      "id": "b1g14658d6gfvdsstr7d",
+      "name": "cloud-b1g14658d6gfvd",
+      "status": "ACTIVE",
+      "zone": {
+        "defaultZone": "ru-central1-c",
+        "effectiveZone": "ru-central1-c",
+        "zoneOverridden": false
+      },
+      "current": true
+    }
+  ],
+  "cloudTree": [
+    {
+      "createdAt": "2018-12-20T11:45:10+00:00",
+      "description": "",
+      "folders": [
+        {
+          "cloudId": "b1g14658d6gfvdsstr7d",
+          "createdAt": "2018-12-20T11:45:10+00:00",
+          "description": "",
+          "id": "b1gj85t4rd5pbe38mu1j",
+          "name": "keeberink",
+          "status": "ACTIVE"
+        },
+        {
+          "cloudId": "b1g14658d6gfvdsstr7d",
+          "createdAt": "2019-01-10T18:02:56+00:00",
+          "description": "",
+          "id": "b1grl5g0k9vuj8hba9c8",
+          "name": "tes1",
+          "status": "ACTIVE"
+        },
+        {
+          "cloudId": "b1g14658d6gfvdsstr7d",
+          "createdAt": "2019-01-11T11:44:11+00:00",
+          "description": "",
+          "id": "b1goqssinitbrf4k9r2m",
+          "name": "test2",
+          "status": "ACTIVE"
+        },
+        {
+          "cloudId": "b1g14658d6gfvdsstr7d",
+          "createdAt": "2019-01-11T11:44:25+00:00",
+          "description": "",
+          "id": "b1gqkm710qmvg0raorp4",
+          "name": "test3",
+          "status": "ACTIVE"
+        }
+      ],
+      "id": "b1g14658d6gfvdsstr7d",
+      "name": "cloud-b1g14658d6gfvd",
+      "status": "ACTIVE",
+      "zone": {
+        "defaultZone": "ru-central1-c",
+        "effectiveZone": "ru-central1-c",
+        "zoneOverridden": false
+      }
+    }
+  ],
+  "services": [
+    {
+      "name": "iam",
+      "available": true
+    },
+    {
+      "name": "compute",
+      "available": true
+    },
+    {
+      "name": "vpc",
+      "available": true
+    },
+    {
+      "name": "api",
+      "available": true
+    },
+    {
+      "name": "load-balancer",
+      "available": true
+    },
+    {
+      "name": "storage",
+      "available": true
+    },
+    {
+      "name": "billing",
+      "available": true
+    },
+    {
+      "name": "marketplace",
+      "available": true
+    },
+    {
+      "name": "mdb",
+      "available": true
+    },
+    {
+      "name": "managed-postgresql",
+      "available": true
+    },
+    {
+      "name": "managed-clickhouse",
+      "available": true
+    },
+    {
+      "name": "managed-mongodb",
+      "available": true
+    },
+    {
+      "name": "managed-redis",
+      "available": true
+    },
+    {
+      "name": "managed-mysql",
+      "available": true
+    },
+    {
+      "name": "ydb",
+      "available": true,
+      "tags": [
+        "new"
+      ]
+    },
+    {
+      "name": "data-proc",
+      "available": true
+    },
+    {
+      "name": "message-queue",
+      "available": true
+    },
+    {
+      "name": "datalens",
+      "available": true
+    },
+    {
+      "name": "yql",
+      "available": true
+    },
+    {
+      "name": "instance-groups",
+      "available": true
+    },
+    {
+      "name": "container-registry",
+      "available": true
+    },
+    {
+      "name": "managed-kubernetes",
+      "available": true
+    },
+    {
+      "name": "serverless-functions",
+      "available": true
+    },
+    {
+      "name": "serverless-triggers",
+      "available": true
+    },
+    {
+      "name": "support",
+      "available": true
+    },
+    {
+      "name": "iot-core",
+      "available": true
+    },
+    {
+      "name": "monitoring",
+      "available": true
+    },
+    {
+      "name": "log-events",
+      "available": true
+    },
+    {
+      "name": "log-groups",
+      "available": true
+    },
+    {
+      "name": "kms",
+      "available": true
+    },
+    {
+      "name": "search",
+      "available": true
+    },
+    {
+      "name": "datasphere",
+      "available": true
+    },
+    {
+      "name": "data-transfer",
+      "available": false,
+      "tags": [
+        "preview"
+      ],
+      "permissionStage": "DATA_TRANSFER_ALPHA"
+    },
+    {
+      "name": "certificate-manager",
+      "available": true,
+      "tags": [
+        "new"
+      ]
+    },
+    {
+      "name": "api-gateway",
+      "available": true,
+      "tags": [
+        "new"
+      ]
+    },
+    {
+      "name": "managed-kafka",
+      "available": true,
+      "tags": [
+        "new"
+      ]
+    },
+    {
+      "name": "managed-elasticsearch",
+      "available": false,
+      "tags": [
+        "preview"
+      ],
+      "permissionStage": "MDB_ELASTICSEARCH_CLUSTER"
+    },
+    {
+      "name": "managed-sqlserver",
+      "available": false,
+      "tags": [
+        "preview"
+      ],
+      "permissionStage": "MDB_SQLSERVER_CLUSTER"
+    }
+  ],
+  "endpoints": {
+    "storage": {
+      "endpoint": "https://storage.yandexcloud.net",
+      "websiteSuffix": "website.yandexcloud.net"
+    },
+    "datalens": {
+      "endpoint": "https://control.datalens.yandex.net"
+    },
+    "serverless-functions": {
+      "functionsEndpoint": "functions.yandexcloud.net"
+    },
+    "serial-console": {
+      "endpoint": "serialws.cloud.yandex.ru"
+    },
+    "monitoring": {
+      "endpoint": "https://monitoring.cloud.yandex.ru"
+    },
+    "container-registry": {
+      "registryEndpoint": "cr.yandex"
+    }
+  },
+  "permissionStages": [
+    "GA"
+  ],
+  "zones": [
+    {
+      "id": "ru-central1-a",
+      "status": "UP"
+    },
+    {
+      "id": "ru-central1-b",
+      "status": "UP"
+    },
+    {
+      "id": "ru-central1-c",
+      "status": "UP"
+    }
+  ],
+  "experiments": {
+    "BANNER_TOOLTIP": true
+  },
+  "internal": false,
+  "metrikaCounters": [
+    {
+      "id": 48570998,
+      "name": "main"
+    },
+    {
+      "id": 51465824,
+      "name": "cross"
+    }
+  ],
+  "version": "1925_2",
+  "env": "ext-prod",
+  "iamUserId": "ajep4tkkhojn9084332p",
+  "avatarHost": "https://avatars.mds.yandex.net",
+  "passportHost": "https://passport.yandex.ru"
+}

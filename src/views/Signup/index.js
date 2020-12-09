@@ -49,30 +49,30 @@ const Signup = props => {
 		eulaAccepted: true,
 	};
 
-	const onSubmit = async (values, actions) => {
-		const signupResponse = await props.signup(values);
+	const onSubmit = async values => {
+		try {
+			const signupResponse = await props.signup(values);
 
-		actions.setSubmitting(false);
+			if (signupResponse.data?.action === 'login') {
+				return history.push({
+					pathname: '/login',
+					search: queryString.stringify({
+						email: values.email,
+						infoCode: signupResponse.data.infoCode,
+					}),
+				});
+			}
 
-		if (signupResponse.data?.action === 'login') {
-			return history.push({
-				pathname: '/login',
-				search: queryString.stringify({
-					email: values.email,
-					infoCode: signupResponse.data.infoCode,
-				}),
-			});
-		}
-
-		const loginResponse = await props.login({ ...values, returnTo: `${CLIENT_URL}/profile` });
-
-		if (loginResponse.status === 'error') {
-			props.enqueueSnackbar({
-				message: loginResponse.data.error_description || 'Неизвестная ошибка.',
-				options: {
-					variant: 'error',
-				},
-			});
+			props.login({ ...values, returnTo: `${CLIENT_URL}/profile` });
+		} catch (error) {
+			if (error.status === 'error') {
+				props.enqueueSnackbar({
+					message: error.data.error_description || 'Неизвестная ошибка.',
+					options: {
+						variant: 'error',
+					},
+				});
+			}
 		}
 	};
 

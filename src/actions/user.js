@@ -22,7 +22,7 @@ export const getMyAccount = () => {
 					payload: error,
 				});
 
-				return Promise.resolve({ status: 'error' });
+				return Promise.reject({ status: 'error' });
 			});
 	};
 };
@@ -49,7 +49,7 @@ export const editPersonalInfo = ({ data }) => {
 					payload: error,
 				});
 
-				return Promise.resolve({ status: 'error' });
+				return Promise.reject({ status: 'error' });
 			});
 	};
 };
@@ -76,7 +76,7 @@ export const changeUserAvatar = ({ data }) => {
 					payload: error,
 				});
 
-				return Promise.resolve({ status: 'error' });
+				return Promise.reject({ status: 'error' });
 			});
 	};
 };
@@ -103,7 +103,7 @@ export const deleteUserAvatar = () => {
 					payload: error,
 				});
 
-				return Promise.resolve({ status: 'error' });
+				return Promise.reject({ status: 'error' });
 			});
 	};
 };

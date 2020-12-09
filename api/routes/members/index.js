@@ -119,9 +119,7 @@ router.post('/linkUserAndStudio', isAuthed, async (req, res, next) => {
 	const { studioId, memberId } = req.body;
 
 	try {
-		const user = await User.findOne({ auth0uid: req.user.sub })
-			.lean()
-			.then(user => (!user ? throw new Error('User not found') : user));
+		const user = await User.findOne({ auth0uid: req.user.sub }).then(user => (!user ? throw new Error('User not found') : user));
 
 		if (!user.settings.studio && !user.settings.member) {
 			user.settings.studio = studioId;

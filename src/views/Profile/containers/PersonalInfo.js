@@ -15,7 +15,7 @@ import Dropdown from 'src/components/Dropdown';
 import styles from './PersonalInfo.module.css';
 
 function PersonalInfo(props) {
-	const { deleteUserAvatar, onOpenDialogByName, currentUser } = props;
+	const { onOpenDialogByName, currentUser } = props;
 	const refDropdownProfile = useRef(null);
 	const [dropdownPhotoProfile, setDropdownPhotoProfile] = useState(false);
 
@@ -76,7 +76,7 @@ function PersonalInfo(props) {
 					<MenuItem
 						onClick={() => {
 							onHandleDropdownPhotoProfile(false);
-							deleteUserAvatar();
+							props.deleteUserAvatar();
 						}}
 					>
 						Удалить

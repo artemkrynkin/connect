@@ -20,10 +20,12 @@ const User = new Schema({
 		studio: {
 			type: Schema.Types.ObjectId,
 			ref: 'Studio',
+			default: null,
 		},
 		member: {
 			type: Schema.Types.ObjectId,
 			ref: 'Member',
+			default: null,
 		},
 	},
 	__v: {

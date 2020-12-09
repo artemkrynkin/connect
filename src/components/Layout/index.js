@@ -9,11 +9,11 @@ import LinkMui from '@material-ui/core/Link';
 import generateMetaInfo from 'shared/generate-meta-info';
 
 import Head from 'src/components/head';
+import HelpPanel from 'src/components/HelpPanel';
+import Sidebar from 'src/components/Sidebar';
 
 import stylesPage from 'src/styles/page.module.css';
 import styles from './index.module.css';
-import HelpPanel from '../HelpPanel';
-import Sidebar from '../Sidebar';
 
 const Layout = props => {
 	const { children, metaInfo, currentUser } = props;

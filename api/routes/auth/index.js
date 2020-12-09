@@ -36,9 +36,7 @@ router.post('/signup', async (req, res, next) => {
 				password,
 				connection: 'Username-Password-Authentication',
 			})
-			.catch(err => {
-				throw new Error(JSON.parse(err.originalError.response.text));
-			});
+			.catch(err => throw new Error(err.message));
 
 		const newUser = new User({
 			auth0uid: `auth0|${auth0user._id}`,
@@ -53,15 +51,13 @@ router.post('/signup', async (req, res, next) => {
 
 		res.json();
 	} catch (err) {
-		if (err?.code === 'invalid_signup') {
-			try {
-				const auth0users = await auth0management.getUsersByEmail(email);
+		const error = JSON.parse(err.message);
 
-				if (!auth0users.length) next({ code: 2, err });
-				else res.json({ action: 'login', infoCode: 'existingUser' });
-			} catch (err) {
-				next({ code: 2, err });
-			}
+		if (error?.code === 'invalid_signup') {
+			const auth0users = await auth0management.getUsersByEmail(email);
+
+			if (auth0users.length) res.json({ action: 'login', infoCode: 'existingUser' });
+			else next({ code: 2, err });
 		} else {
 			next({ code: 2, err });
 		}
@@ -69,39 +65,37 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.get('/loginCallback', async (req, res) => {
-	const { returnTo, code, error, error_description } = req.query;
-	const resetLogin = (path, description) => {
-		res.clearCookie('session.token');
-
-		redirectUrl = new URL(`${FALLBACK_URL}${path}`);
-
-		redirectUrl.searchParams.append('snackbarMessage', description);
-		redirectUrl.searchParams.append('snackbarType', 'error');
-	};
+	const { returnTo, code, error } = req.query;
 
 	let redirectUrl = new URL(returnTo || FALLBACK_URL);
 
-	if (!error) {
-		await auth0client.oauth
+	try {
+		if (error) throw new Error(JSON.stringify(req.query));
+
+		const { access_token, expires_in } = await auth0client.oauth
 			.authorizationCodeGrant({
-				code,
+				code: code,
 				redirect_uri: config.redirectUri,
 			})
-			.then(({ access_token, id_token, scope, expires_in, token_type }) => {
-				res.cookie('session.token', access_token, {
-					maxAge: expires_in * 1000,
-					httpOnly: true,
-					domain: IS_PROD ? '.keeberink.com' : '',
-					secure: IS_PROD,
-				});
-			})
-			.catch(err => {
-				const error = JSON.parse(err.message);
+			.catch(err => throw new Error(err.message));
 
-				resetLogin('/login', error.error_description);
-			});
-	} else {
-		resetLogin('/login', error_description);
+		res.cookie('session.token', access_token, {
+			maxAge: expires_in * 1000,
+			httpOnly: true,
+			domain: IS_PROD ? '.keeberink.com' : '',
+			secure: IS_PROD,
+		});
+	} catch (err) {
+		const error = JSON.parse(err.message);
+
+		if (typeof error === 'object') {
+			res.clearCookie('session.token');
+
+			redirectUrl = new URL(`${FALLBACK_URL}/login`);
+
+			redirectUrl.searchParams.append('snackbarMessage', error?.error_description);
+			redirectUrl.searchParams.append('snackbarType', 'error');
+		}
 	}
 
 	res.redirect(redirectUrl.href);

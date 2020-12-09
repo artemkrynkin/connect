@@ -40,26 +40,24 @@ const PasswordReset = props => {
 
 	const onTogglePasswordResetEmailSent = value => setPasswordResetEmailSent(value);
 
-	const onSubmit = (values, actions) => {
-		props.resetPassword(values).then(({ status, data }) => {
-			actions.setSubmitting(false);
+	const onSubmit = async (values, actions) => {
+		try {
+			await props.resetPassword(values);
 
-			if (status === 'success') {
-				onTogglePasswordResetEmailSent(true);
-			} else {
-				actions.setErrors({
-					email: true,
-					password: true,
-				});
+			onTogglePasswordResetEmailSent(true);
+		} catch (error) {
+			actions.setErrors({
+				email: true,
+				password: true,
+			});
 
-				props.enqueueSnackbar({
-					message: data.error_description || 'Неизвестная ошибка.',
-					options: {
-						variant: 'error',
-					},
-				});
-			}
-		});
+			props.enqueueSnackbar({
+				message: error.data.error_description || 'Неизвестная ошибка.',
+				options: {
+					variant: 'error',
+				},
+			});
+		}
 	};
 
 	return (
