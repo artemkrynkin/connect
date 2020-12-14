@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import i18n from 'i18n';
 import momentTz from 'moment-timezone';
 
+import { dbAccount } from 'shared/db';
 import { formatNumber } from 'shared/utils';
 
 const Schema = mongoose.Schema;
@@ -75,4 +76,4 @@ const Studio = new Schema({
 	},
 });
 
-export default mongoose.model('Studio', Studio);
+export default dbAccount.model('Studio', Studio);

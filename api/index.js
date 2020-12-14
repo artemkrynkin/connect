@@ -6,7 +6,6 @@ import express from 'express';
 import compression from 'compression';
 import http from 'http';
 
-import DBConnection from 'shared/db';
 import csrf from 'shared/middlewares/csrf';
 import errorHandler from 'shared/middlewares/error-handler';
 import i18n from 'shared/middlewares/i18n';
@@ -47,10 +46,8 @@ app.use('/', (req, res) => {
 
 app.use(errorHandler);
 
-DBConnection.once('open', () => {
-	server.listen(PORT, err => {
-		if (err) return debug('Oops, something went wrong!', err);
+server.listen(PORT, err => {
+	if (err) return debug('Oops, something went wrong!', err);
 
-		debug(`API running at http://localhost:${PORT}/api`);
-	});
+	debug(`API running at http://localhost:${PORT}/api`);
 });

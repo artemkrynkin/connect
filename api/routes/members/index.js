@@ -91,7 +91,7 @@ router.post(
 );
 
 router.post(
-	'/userInvitationByQr',
+	'/memberInvitationByQr',
 	isAuthed,
 	(req, res, next) => hasPermissions(req, res, next, ['studio.control']),
 	async (req, res, next) => {

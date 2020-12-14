@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import { dbAccount } from 'shared/db';
+
 const Schema = mongoose.Schema;
 
 const User = new Schema({
@@ -34,4 +36,4 @@ const User = new Schema({
 	},
 });
 
-export default mongoose.model('User', User);
+export default dbAccount.model('User', User);

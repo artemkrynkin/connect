@@ -105,7 +105,17 @@ router.post(
 		} = req.body;
 
 		try {
-			const studio = await Studio.findByIdAndUpdate(studioId, { $set: studioEdited }, { new: true, runValidators: true });
+			const studio = await Studio.findById(studioId);
+
+			if (studioEdited.name) studio.name = studioEdited.name;
+			if (studioEdited.timezone) studio.timezone = studioEdited.timezone;
+			if (studioEdited.settings) studio.settings = studioEdited.settings;
+
+			const studioErr = studio.validateSync();
+
+			if (studioErr) return next({ code: 2, err: studioErr });
+
+			await studio.save();
 
 			res.json(studio);
 		} catch (err) {

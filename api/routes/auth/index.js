@@ -93,8 +93,8 @@ router.get('/loginCallback', async (req, res) => {
 
 			redirectUrl = new URL(`${FALLBACK_URL}/login`);
 
-			redirectUrl.searchParams.append('snackbarMessage', error?.error_description);
-			redirectUrl.searchParams.append('snackbarType', 'error');
+			redirectUrl.searchParams.set('snackbarMessage', error?.error_description);
+			redirectUrl.searchParams.set('snackbarType', 'error');
 		}
 	}
 
@@ -106,8 +106,8 @@ router.get('/logout', async (req, res) => {
 
 	let redirectUrl = new URL(`https://${config.domain}/v2/logout`);
 
-	redirectUrl.searchParams.append('client_id', config.clientId);
-	redirectUrl.searchParams.append('returnTo', returnTo || FALLBACK_URL);
+	redirectUrl.searchParams.set('client_id', config.clientId);
+	redirectUrl.searchParams.set('returnTo', returnTo || FALLBACK_URL);
 
 	res.clearCookie('session.token', {
 		domain: IS_PROD ? '.keeberink.com' : '',

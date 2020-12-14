@@ -160,10 +160,7 @@ router.post('/hasPermissions', isAuthed, async (req, res, next) => {
 	try {
 		const member = await Member.findById(memberId).lean();
 
-		if (!checkPermissions(member.roles, accessRightList)) {
-			console.log(1);
-			return next({ code: 4 });
-		}
+		if (!checkPermissions(member.roles, accessRightList)) return next({ code: 4 });
 
 		res.json(true);
 	} catch (err) {
