@@ -20,6 +20,8 @@ export const getStudios = (
 					type: 'RECEIVE_STUDIOS',
 					payload: response.data,
 				});
+
+				return Promise.resolve({ status: 'success' });
 			})
 			.catch(error => {
 				console.error(error);
@@ -29,7 +31,7 @@ export const getStudios = (
 					payload: error,
 				});
 
-				return Promise.resolve({ status: 'error' });
+				return Promise.reject({ status: 'error' });
 			});
 	};
 };

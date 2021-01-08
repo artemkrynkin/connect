@@ -25,6 +25,7 @@ const PasswordResetForm = props => {
 					<FormControl margin="normal" fullWidth>
 						<Field
 							name="email"
+							type="email"
 							label="Мы отправим ссылку для восстановления на адрес"
 							placeholder="Введите адрес электронной почты"
 							error={Boolean(touched.email && errors.email)}

@@ -64,6 +64,7 @@ const LoginForm = props => {
 				<Field
 					inputRef={emailFieldRef}
 					className={ClassNames({ [styles.emailField]: stepLogin })}
+					type="email"
 					name="email"
 					placeholder="Введите адрес электронной почты"
 					error={Boolean((touched.email && errors.email) || errors.emailOrPassword)}

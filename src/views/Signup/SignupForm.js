@@ -48,6 +48,7 @@ const SignupForm = props => {
 			<FormControl margin="normal" fullWidth>
 				<Field
 					name="email"
+					type="email"
 					placeholder="Введите адрес электронной почты"
 					error={Boolean(touched.email && errors.email)}
 					helperText={typeof errors.email === 'string' && touched.email && errors.email}

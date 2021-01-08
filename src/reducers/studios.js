@@ -2,6 +2,7 @@ const studios = (
 	state = {
 		isFetching: false,
 		data: null,
+		error: null,
 	},
 	action
 ) => {
@@ -12,7 +13,7 @@ const studios = (
 				isFetching: true,
 			};
 		}
-		case 'EMPTY_MEMBERS': {
+		case 'EMPTY_STUDIOS': {
 			return {
 				...state,
 				data: null,

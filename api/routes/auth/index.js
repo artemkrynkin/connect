@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { URL } from 'url';
+import axios from 'axios';
 
 import { config } from 'shared/auth0/api';
 
@@ -127,6 +128,27 @@ router.post('/resetPassword', (req, res, next) => {
 		})
 		.then(() => res.json())
 		.catch(err => next({ code: 2, err }));
+});
+
+router.post('/getAccessToken', async (req, res, next) => {
+	const { code, codeVerifier, redirectUri } = req.body;
+
+	try {
+		const { id_token, ...remainingParams } = await auth0client.oauth
+			.authorizationCodeGrant({
+				code: code,
+				code_verifier: codeVerifier,
+				redirect_uri: redirectUri,
+			})
+			.catch(err => throw new Error(err.message));
+
+		res.json({
+			...remainingParams,
+			id_token: null,
+		});
+	} catch (err) {
+		next({ code: 2, err });
+	}
 });
 
 export default router;
