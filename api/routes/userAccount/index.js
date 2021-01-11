@@ -7,9 +7,8 @@ import sharp from 'sharp';
 import { checkPermissions } from 'shared/roles-access-rights';
 
 import { uploadAvatar } from 'api/utils/multer-settings';
-import { auth0management } from 'api/utils/auth';
+import { auth0management, mergedUserAccounts } from 'api/utils/auth';
 import { isAuthed } from 'api/utils/permissions';
-import { mergedUserAccounts } from 'api/utils/auth';
 
 import User from 'api/models/user';
 import Member from 'api/models/member';

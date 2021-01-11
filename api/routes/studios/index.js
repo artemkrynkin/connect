@@ -46,6 +46,20 @@ router.post('/getStudios', isAuthed, async (req, res, next) => {
 	}
 });
 
+router.post('/getStudio', isAuthed, async (req, res, next) => {
+	const {
+		params: { studioId },
+	} = req.body;
+
+	try {
+		const studio = await Studio.findById(studioId).lean();
+
+		res.json(studio);
+	} catch (err) {
+		next({ code: 2, err });
+	}
+});
+
 router.post('/createStudio', isAuthed, async (req, res, next) => {
 	const {
 		data: { studio: newStudioValues },

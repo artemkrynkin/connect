@@ -5,7 +5,7 @@ import { isAuthed, hasPermissions } from 'api/utils/permissions';
 
 import { memberRoleTransform } from 'shared/roles-access-rights';
 
-import User from 'api/models/member';
+import User from 'api/models/user';
 import Studio from 'api/models/studio';
 import Member from 'api/models/member';
 
@@ -116,25 +116,41 @@ router.post(
 );
 
 router.post('/linkUserAndStudio', isAuthed, async (req, res, next) => {
-	const { studioId, memberId } = req.body;
+	const {
+		data: { studioId },
+	} = req.body;
 
 	try {
 		const user = await User.findOne({ auth0uid: req.user.sub }).then(user => (!user ? throw new Error('User not found') : user));
 
+		const newMember = new Member({
+			user: user._id,
+			studio: studioId,
+			roles: ['artist'],
+			confirmed: true,
+			deactivated: false,
+			lastBillingDate: Date.now(),
+			nextBillingDate: Date.now(),
+		});
+
 		if (!user.settings.studio && !user.settings.member) {
 			user.settings.studio = studioId;
-			user.settings.member = memberId;
+			user.settings.member = newMember._id;
 		}
 
 		const userErr = user.validateSync();
+		const newMemberErr = newMember.validateSync();
 
 		if (userErr) return next({ code: userErr.errors ? 5 : 2, err: userErr });
+		if (newMemberErr) return next({ code: newMemberErr.errors ? 5 : 2, err: newMemberErr });
 
-		await Promise.all(
+		await Promise.all([
+			newMember.save(),
 			user.save(),
-			Member.findByIdAndUpdate(memberId, { $set: { user: user._id } }),
-			Studio.findByIdAndUpdate(studioId, { $push: { users: user._id } })
-		);
+			Studio.findByIdAndUpdate(studioId, { $push: { members: newMember._id, users: user._id } }),
+		]);
+
+		res.json();
 	} catch (err) {
 		next({ code: 2, err });
 	}
@@ -158,7 +174,7 @@ router.post(
 
 			const member = await Member.findByIdAndUpdate(memberId, { $set: memberValues }, { new: true, runValidators: true }).populate(
 				'user',
-				'avatar name email'
+				'picture name email'
 			);
 
 			res.json(member);
@@ -180,7 +196,7 @@ router.post(
 		try {
 			const member = await Member.findByIdAndUpdate(memberId, { $set: { deactivated: true } }, { new: true, runValidators: true }).populate(
 				'user',
-				'avatar name email'
+				'picture name email'
 			);
 
 			res.json(member);

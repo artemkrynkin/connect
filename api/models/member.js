@@ -17,6 +17,9 @@ const Member = new Schema({
 		required: [true, i18n.__('Обязательное поле')],
 		select: false,
 	},
+	invitationCode: {
+		type: String,
+	},
 	roles: [
 		{
 			type: String,

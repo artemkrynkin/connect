@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { URL } from 'url';
-import axios from 'axios';
 
 import { config } from 'shared/auth0/api';
 
