@@ -105,7 +105,7 @@ const Signup = props => {
 					<div className={stylesLayout.infoUnderCardItem}>
 						Эта страница защищена reCAPTCHA, при этом применяются
 						<br />
-						<LinkMui href="/manifest.json" target="_blank" rel="noreferrer noopener">
+						<LinkMui href="https://keeberink.com/privacy.pdf" target="_blank" rel="noreferrer noopener">
 							Политика конфиденциальности
 						</LinkMui>{' '}
 						и{' '}

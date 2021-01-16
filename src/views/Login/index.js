@@ -140,7 +140,7 @@ const Login = props => {
 				</Paper>
 				<div className={stylesLayout.infoUnderCard}>
 					<div className={stylesLayout.infoUnderCardItem}>
-						<LinkMui href="/manifest.json" target="_blank" rel="noreferrer noopener">
+						<LinkMui href="https://keeberink.com/privacy.pdf" target="_blank" rel="noreferrer noopener">
 							Политика конфиденциальности
 						</LinkMui>
 					</div>

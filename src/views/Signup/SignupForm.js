@@ -138,7 +138,7 @@ const SignupForm = props => {
 									Условия использования
 								</LinkMui>
 								&nbsp;и даю своё согласие на&nbsp;обработку моей персональной информации на&nbsp;условиях, определенных{' '}
-								<LinkMui href="/manifest.json" target="_blank" rel="noreferrer noopener">
+								<LinkMui href="https://keeberink.com/privacy.pdf" target="_blank" rel="noreferrer noopener">
 									Политикой конфиденциальности
 								</LinkMui>{' '}
 								KeeberInk.
